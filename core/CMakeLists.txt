@@ -1,0 +1,5 @@
+file(GLOB sources CONFIGURE_DEPENDS src/*.cpp)
+add_library(mcx_core STATIC ${sources})
+target_include_directories(mcx_core PUBLIC include)
+find_package(Threads REQUIRED)
+target_link_libraries(mcx_core PUBLIC Threads::Threads $<$<PLATFORM_ID:Windows>:ws2_32>)

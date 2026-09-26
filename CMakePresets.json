@@ -1,0 +1,33 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "host",
+      "binaryDir": "${sourceDir}/build/host",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "windows-arm64",
+      "binaryDir": "${sourceDir}/build/arm64",
+      "generator": "Visual Studio 18 2026",
+      "architecture": "ARM64",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" }
+    },
+    {
+      "name": "windows-x64",
+      "binaryDir": "${sourceDir}/build/x64",
+      "generator": "Visual Studio 18 2026",
+      "architecture": "x64",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "host", "configurePreset": "host" },
+    { "name": "windows-arm64", "configurePreset": "windows-arm64", "configuration": "Release" },
+    { "name": "windows-x64", "configurePreset": "windows-x64", "configuration": "Release" }
+  ],
+  "testPresets": [
+    { "name": "host", "configurePreset": "host", "output": { "outputOnFailure": true } },
+    { "name": "windows-arm64", "configurePreset": "windows-arm64", "configuration": "Release", "output": { "outputOnFailure": true } }
+  ]
+}

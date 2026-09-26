@@ -1,0 +1,5 @@
+file(GLOB sources CONFIGURE_DEPENDS *.cpp)
+add_library(mcx_shell SHARED ${sources} mcx.def)
+set_target_properties(mcx_shell PROPERTIES OUTPUT_NAME McExplorer)
+target_compile_definitions(mcx_shell PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN NOMINMAX)
+target_link_libraries(mcx_shell PRIVATE mcx_core shlwapi shell32 ole32 oleaut32 propsys advapi32 uuid)
